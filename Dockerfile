@@ -9,4 +9,4 @@ COPY main.mjs ./
 
 EXPOSE 9100
 
-CMD ["node", "index.mjs"]
+CMD ["node", "main.mjs"]
