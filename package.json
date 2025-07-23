@@ -1,0 +1,16 @@
+{
+  "name": "projectzomboid_exporter",
+  "version": "1.0.0",
+  "main": "main.mjs",
+  "scripts": {
+    "start": "node main.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0",
+    "gamedig": "^5.3.1"
+  }
+}
