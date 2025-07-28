@@ -4,7 +4,7 @@ import { GameDig } from 'gamedig';
 const app = express();
 const PORT = process.env.PORT || 9100;
 
-const SERVER = {
+const DEFAULT_SERVER = {
     type: process.env.PZ_TYPE || 'projectzomboid',
     host: process.env.PZ_HOST || 't8.sjcmc.cn',
     port: process.env.PZ_PORT ? parseInt(process.env.PZ_PORT) : 25480
@@ -16,8 +16,19 @@ function sanitizeLabelValue(str) {
 }
 
 app.get('/metrics', async (req, res) => {
+    let target = req.query.target;
+    if (!target) {
+        target = `${DEFAULT_SERVER.host}:${DEFAULT_SERVER.port}`;
+    }
+    let [host, port] = target.split(':');
+    port = port ? parseInt(port) : 25480;
+    const server = {
+        type: DEFAULT_SERVER.type,
+        host: host,
+        port: port
+    };
     try {
-        const state = await GameDig.query(SERVER);
+        const state = await GameDig.query(server);
 
         let metrics = '';
         metrics += `pz_server_up 1\n`;
